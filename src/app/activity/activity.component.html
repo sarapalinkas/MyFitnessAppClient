@@ -1,0 +1,23 @@
+<div class="col-md-6">
+    <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>goalType</th>
+      <th>quantity</th>
+      <th>week</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="!!activities">
+        <tr *ngFor="let activity of activities">
+            <td>{{activity.id}}</td>
+            <td>{{activity.goalType}}</td>
+            <td>{{activity.quantity}}</td>
+            <td>{{activity.currentWeek}}</td>
+            <td><button class="btn btn-danger" (click)="deleteActivity(activity)"> Delete Activity</button></td>
+            </tr>
+    </tbody>
+      </table>
+  
+    </div>
+      

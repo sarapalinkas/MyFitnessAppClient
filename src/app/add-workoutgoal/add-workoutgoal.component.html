@@ -1,0 +1,17 @@
+<div class="col-md-6">
+    <h2 class="text-center">Add Workoutgoal</h2>
+    <form>
+      <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="quantity" [(ngModel)]="user.goalQuantity" placeholder="Quantity" name="quantity" class="form-control" id="quantity">
+      </div>
+    
+      <div class="form-group">
+        <label for="frequency">Frequency:</label>
+        <input [(ngModel)]="user.frequency" placeholder="Frequency" name="frequency" class="form-control" id="frequency">
+      </div>
+    
+      <button class="btn btn-success" (click)="createWorkoutgoal()">Create</button>
+    </form>
+    </div>
+        
