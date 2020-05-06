@@ -1,16 +1,15 @@
 <header>
     <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="navbar-brand">MyFitnessApp</div>
+    <div class="navbar-brand" *ngIf="!loginService.isUserLoggedIn()">MyFitnessApp</div>
+    <div class="navbar-brand" *ngIf="loginService.isUserLoggedIn()"><a  routerLink="" class="nav-link text-white">MyFitnessApp</a></div>
     
     <ul class="navbar-nav">
-      <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/" class="nav-link">View Workoutgoals</a></li>
-      <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/addworkoutgoal" class="nav-link">Add New Workoutgoal</a></li>
-      <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/workoutActivities/WorkoutGoal" class="nav-link">View Activities</a></li>
-      <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/addActivity" class="nav-link">Add New Activity</a></li>
       <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
       <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/register" class="nav-link">Register</a></li>
-      <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
-  
+      <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/user" class="nav-link">User</a></li>
+    </ul> 
+    <ul class="nav navbar-nav navbar-right">
+      <li ><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
     </ul>
     
     </nav>

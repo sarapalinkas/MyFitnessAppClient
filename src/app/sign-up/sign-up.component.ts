@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClientService } from '../service/http-client.service';
-import { User } from '../service/authentication.service';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-sign-up',

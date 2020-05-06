@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <h1>Hello {{userName}}!</h1>
+  </div>
+  <div class="row">
+<h2>Your Medals</h2>
+</div>
+<div class="row">
+<div *ngFor="let medal of medals">
+  <mat-icon aria-hidden="false" class="text-warning p-4"  aria-label="Example home icon">emoji_events</mat-icon>
+</div>
+</div>
+
+<h2>Your Goals</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">goalQuantity</th>
+        <th scope="col">frequency</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="workoutGoal">
+            <td>Workout Goal</td>
+            <td>{{workoutGoal.goalQuantity}}</td>
+            <td>{{workoutGoal.frequency}}</td>
+            <button (click)="updateGoal('Workout', workoutGoal)">Update</button>
+            <button (click)="deleteGoal('workoutGoal', workoutGoal)">Delete</button>
+        </tr>
+        <tr *ngIf="meditationGoal">
+            <td>Meditation Goal</td>
+            <td>{{meditationGoal.goalQuantity}}</td>
+            <td>{{meditationGoal.frequency}}</td>
+            <button (click)="updateGoal('Meditation', meditationGoal)">Update</button>
+            <button (click)="deleteGoal('meditationGoal', meditationGoal)">Delete</button>
+        </tr>
+        <tr *ngIf="natureGoal">
+            <td>Nature Goal</td>
+            <td>{{natureGoal.goalQuantity}}</td>
+            <td>{{natureGoal.frequency}}</td>
+            <button (click)="updateGoal('Nature',natureGoal)">Update</button>
+            <button (click)="deleteGoal('natureGoal', natureGoal)">Delete</button>
+        </tr>
+        <tr *ngIf="sleepGoal">
+            <td>Sleep Goal</td>
+            <td>{{sleepGoal.goalQuantity}}</td>
+            <td></td>
+            <button (click)="updateGoal('Sleep', sleepGoal)">Update</button>
+            <button (click)="deleteGoal('sleepGoal', sleepGoal)">Delete</button>
+          </tr>
+          <tr *ngIf="vegGoal">
+            <td>Vegetable Goal</td>
+            <td>{{vegGoal.goalQuantity}}</td>
+            <td></td>
+            <button (click)="updateGoal('Vegetable', vegGoal)">Update</button>
+            <button (click)="deleteGoal('vegGoal', vegGoal)">Delete</button>
+          </tr>
+        <tr *ngIf="fruitGoal">
+            <td>Fruit Goal</td>
+            <td>{{fruitGoal.goalQuantity}}</td>
+            <td></td>
+            <button (click)="updateGoal('Fruit', fruitGoal)">Update</button>
+            <button (click)="deleteGoal('fruitGoal',fruitGoal)">Delete</button>
+        </tr>
+        </tbody>
+    </table>
+  </div>

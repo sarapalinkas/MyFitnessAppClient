@@ -3,38 +3,70 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { WorkoutgoalComponent } from './workoutgoal/workoutgoal.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AddWorkoutgoalComponent } from './add-workoutgoal/add-workoutgoal.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AuthHtppInterceptorService } from './service/auth-htpp-interceptor-service.service';
-import { ActivityComponent } from './activity/activity.component';
-import { AddActivityComponent } from './add-activity/add-activity.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { MainPageComponent } from './main-page/main-page.component';
+import {MatDividerModule} from '@angular/material/divider';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
+import {MatListModule} from '@angular/material/list';
+import * as moment from 'moment';
+import {MatCardModule} from '@angular/material/card';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddGoalDialogComponent } from './main-page/add-goal-dialog/add-goal-dialog.component';
+import { AddActivityDialogComponent } from './main-page/add-activity-dialog/add-activity-dialog.component';
+import { DetailsPageComponent } from './details-page/details-page.component';
+import { UpdateGoalsComponent } from './details-page/update-goals/update-goals.component';
+
+export function momentAdapterFactory() {
+  return adapterFactory(moment);
+};
 
 @NgModule({
   declarations: [
     AppComponent,
-    WorkoutgoalComponent,
-    AddWorkoutgoalComponent,
     HeaderComponent,
     LoginComponent,
     LogoutComponent,
-    ActivityComponent,
-    AddActivityComponent,
-    SignUpComponent
+    SignUpComponent,
+    MainPageComponent,
+    AddGoalDialogComponent,
+    AddActivityDialogComponent,
+    DetailsPageComponent,
+    UpdateGoalsComponent,
   ],
   imports: [
     BrowserModule,
+    MatIconModule,
+    MatMenuModule,
+    MatListModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatDialogModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
+    BrowserAnimationsModule
   ],
-  providers: [{  
-    provide:HTTP_INTERCEPTORS, useClass:AuthHtppInterceptorService, multi:true 
-  }],
+  providers: [
+    {provide:HTTP_INTERCEPTORS, useClass:AuthHtppInterceptorService, multi:true},
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
