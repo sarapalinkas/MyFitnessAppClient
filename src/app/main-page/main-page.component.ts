@@ -32,6 +32,7 @@ export class MainPageComponent implements OnInit {
   veg: VegGoal;
   sleep: SleepGoal;
 
+  activities = ["Workout", "Sleep", "Fruit", "Vegetable", "Nature", "Meditation"]
   quantity: number;
   act_quantity: number;
   frequency: number;

@@ -16,8 +16,8 @@
                     <mat-icon>add</mat-icon>
                     </button>
                     <mat-menu #menu2="matMenu">
-                        <button mat-menu-item *ngFor="let goal of goals" (click)="addActivity(goal)">
-                            <span>{{goal}} activity</span>
+                        <button mat-menu-item *ngFor="let activity of activities" (click)="addActivity(activity)">
+                            <span>{{activity}} activity</span>
                         </button>   
                     </mat-menu>
             </div> 
