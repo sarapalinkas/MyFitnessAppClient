@@ -32,14 +32,15 @@ export class MainPageComponent implements OnInit {
   veg: VegGoal;
   sleep: SleepGoal;
 
-  activities = ["Workout", "Sleep", "Fruit", "Vegetable", "Nature", "Meditation"]
+  activities = ["Workout", "Sleep", "Fruit", "Vegetable", "Nature", "Meditation"];
   quantity: number;
   act_quantity: number;
   frequency: number;
   view: CalendarView = CalendarView.Week;
+  startdate = new Date('2020-05-15T00:00:00.000Z');
   events: CalendarEvent[] = [
       {
-        start: new Date(),
+        start: this.startdate,
         title: 'Myevent',
       }
   ];
@@ -66,7 +67,10 @@ export class MainPageComponent implements OnInit {
   public get goals()
   {
     var goals = new Array<string>();
-    if(!this.workout) goals.push("Workout");
+    if(!this.workout) 
+    {
+      goals.push("Workout");
+    }
     if(!this.sleep) goals.push("Sleep");
     if(!this.nature) goals.push("Nature");
     if(!this.meditation) goals.push("Meditation");

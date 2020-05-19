@@ -9,6 +9,7 @@ import { MeditationGoal } from '../model/meditation.model';
 import { HttpClientService } from '../service/http-client.service';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateGoalsComponent } from './update-goals/update-goals.component';
+import { Activity } from '../model/activity.model';
 export interface UpdateDialogData {
   goaltype: string;
   goal: any;
@@ -35,6 +36,13 @@ export class DetailsPageComponent implements OnInit {
   fruitGoal: FruitGoal;
   vegGoal: VegGoal;
   meditationGoal: MeditationGoal;
+
+  workoutActivities: Activity[];
+  sleepActivities: Activity[];
+  fruitActivities: Activity[];
+  vegActivities: Activity[];
+  meditationActivities: Activity[];
+  natureActivities: Activity[];
 
   goals = [
     this.workoutGoal,
@@ -73,6 +81,31 @@ export class DetailsPageComponent implements OnInit {
     this.httpClientService.getMedals().subscribe(
       result => this.medals = Array(result)
     );
+    this.httpClientService.getActivities('Workout').subscribe(
+      result => this.workoutActivities = Array(result)
+    );
+    this.httpClientService.getActivities('Sleep').subscribe(
+      result => this.sleepActivities = Array(result)
+    );
+    this.httpClientService.getActivities('Fruit').subscribe(
+      result => this.fruitActivities = Array(result)
+    );
+    this.httpClientService.getActivities('Vegetable').subscribe(
+      result => this.vegActivities = Array(result)
+    );
+    this.httpClientService.getActivities('Meditation').subscribe(
+      result => this.meditationActivities = Array(result)
+    );
+    this.httpClientService.getActivities('Nature').subscribe(
+      result => this.natureActivities = Array(result)
+    );
+    console.log(new Date());
+
+  }
+
+  public get workoutActivites(): Activity[]
+  {
+    return this.workoutActivities;
   }
 
   public updateGoal(goaltype: string, goal: any): void
@@ -88,6 +121,12 @@ export class DetailsPageComponent implements OnInit {
     });
     
   
+  }
+
+  public deleteActivity(id: number): void
+  {
+    console.log(id);
+    this.httpClientService.deleteActivity(id).subscribe();
   }
 
   public deleteGoal(goaltype: string, goal: any): void

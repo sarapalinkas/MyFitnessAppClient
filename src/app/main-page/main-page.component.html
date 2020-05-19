@@ -33,6 +33,7 @@
                 
             >
             </mwl-calendar-week-view>
+            
         </div>
         <div class="col-3">
             <mat-card>
@@ -42,15 +43,15 @@
                 <mat-card-content>
                     <table class="table">
                         <tbody>
-                            <tr *ngIf="this.sleep">
+                            <tr *ngIf="this.sleep && this.sleep.howManyLeft>0">
                               <td>Sleep</td>
                               <td>{{this.sleep.howManyLeft}} hours</td>
                             </tr>
-                            <tr *ngIf="this.fruit">
+                            <tr *ngIf="this.fruit && this.fruit.howManyLeft>0">
                               <td>Fruit</td>
                               <td>{{this.fruit.howManyLeft}} portions</td>
                             </tr>
-                            <tr *ngIf="this.veg">
+                            <tr *ngIf="this.veg && this.veg.howManyLeft>0">
                                 <td>Vegetables</td>
                                 <td>{{this.veg.howManyLeft}} portions</td>
                               </tr>
@@ -65,17 +66,17 @@
                 <mat-card-content>
                     <table class="table">
                         <tbody>
-                            <tr *ngIf="this.workout && this.workout.howManyLeft!==0">
+                            <tr *ngIf="this.workout && this.workout.howManyLeft>0">
                               <td>Workout</td>
                               <td>{{this.workout.goalQuantity}} minutes</td>
                               <td>{{this.workout.howManyLeft}} times</td>
                             </tr>
-                            <tr *ngIf="this.meditation && this.meditation.howManyLeft!==0">
+                            <tr *ngIf="this.meditation && this.meditation.howManyLeft>0">
                               <td>Meditation</td>
                               <td>{{this.meditation.goalQuantity}} minutes</td>
                               <td>{{this.meditation.howManyLeft}} times</td>
                             </tr>
-                            <tr *ngIf="this.nature && this.nature.howManyLeft!==0">
+                            <tr *ngIf="this.nature && this.nature.howManyLeft>0">
                                 <td>Time in nature</td>
                                 <td>{{this.nature.goalQuantity}} minutes</td>
                                 <td>{{this.nature.howManyLeft}} times</td>

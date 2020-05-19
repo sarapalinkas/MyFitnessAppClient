@@ -52,9 +52,38 @@ export class HttpClientService {
     ('http://localhost:8080/activities' + "/"+ type);
   }
 
-  public deleteActivity(activity) {
+  public getPastActivities(type){
+    return this.httpClient.get<Activity[]>
+    ('http://localhost:8080/stat' + "/"+ type);
+  }
+  public getPastWorkoutGoals(){
+    return this.httpClient.get<WorkoutGoal[]>
+    ('http://localhost:8080/stat/workoutgoal');
+  }
+  public getPastSleepGoals(){
+    return this.httpClient.get<SleepGoal[]>
+    ('http://localhost:8080/stat/sleepgoal');
+  }
+  public getPastVegGoals(){
+    return this.httpClient.get<VegGoal[]>
+    ('http://localhost:8080/stat/veggoal');
+  }
+  public getPastFruitGoals(){
+    return this.httpClient.get<FruitGoal[]>
+    ('http://localhost:8080/stat/fruitgoal');
+  }
+  public getPastNatureGoals(){
+    return this.httpClient.get<NatureGoal[]>
+    ('http://localhost:8080/stat/naturegoal');
+  }
+  public getPastMeditationGoals(){
+    return this.httpClient.get<MeditationGoal[]>
+    ('http://localhost:8080/stat/meditationgoal');
+  }
+  public deleteActivity(id) {
+    console.log(id);
   return this.httpClient.delete<Activity>
-    ("http://localhost:8080/activities" + "/"+ activity.id);
+    ("http://localhost:8080/activities" + "/"+ id);
   }
 
   public createActivity(activity) {

@@ -19,6 +19,7 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import * as moment from 'moment';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,6 +27,7 @@ import { AddGoalDialogComponent } from './main-page/add-goal-dialog/add-goal-dia
 import { AddActivityDialogComponent } from './main-page/add-activity-dialog/add-activity-dialog.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
 import { UpdateGoalsComponent } from './details-page/update-goals/update-goals.component';
+import { StatComponent } from './stat/stat.component';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -39,15 +41,18 @@ export function momentAdapterFactory() {
     LogoutComponent,
     SignUpComponent,
     MainPageComponent,
+    StatComponent,
     AddGoalDialogComponent,
     AddActivityDialogComponent,
     DetailsPageComponent,
     UpdateGoalsComponent,
+    StatComponent,
   ],
   imports: [
     BrowserModule,
     MatIconModule,
     MatMenuModule,
+    MatExpansionModule,
     MatListModule,
     MatDividerModule,
     MatFormFieldModule,

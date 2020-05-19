@@ -12,7 +12,142 @@
 </div>
 
 <h2>Your Goals</h2>
-  <table class="table">
+<mat-accordion>
+  <mat-expansion-panel *ngIf="workoutGoal">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Workout goal
+      </mat-panel-title>
+      <mat-panel-description>
+        {{workoutGoal.goalQuantity}} minutes, {{workoutGoal.frequency}} times a week
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+      <ul class="container" *ngFor="let act of workoutActivities">
+        <li class="row" *ngFor="let a of act">
+          <p class="col">Activity:  </p> 
+          <p class="col"> {{a.quantity}} minutes </p>
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button>
+        </li>
+      </ul>
+    
+    <mat-action-row>
+      <button mat-button color="primary" (click)="updateGoal('workoutGoal', workoutGoal)">Update</button>
+      <button mat-button color="primary" (click)="deleteGoal('workoutGoal', workoutGoal)">Delete</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngIf="sleepGoal">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Sleep goal
+      </mat-panel-title>
+      <mat-panel-description>
+        {{sleepGoal.goalQuantity}} hours a week
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+      <ul *ngFor="let act of sleepActivities">
+        <li *ngFor="let a of act">
+          <p>Activity: {{a.quantity}} hours </p>  
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button>
+        </li>
+      </ul>
+    
+    <mat-action-row>
+      <button mat-button color="primary" (click)="updateGoal('sleepGoal', sleepGoal)">Update</button>
+      <button mat-button color="primary" (click)="deleteGoal('sleepGoal', sleepGoal)">Delete</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngIf="fruitGoal">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Fruit goal
+      </mat-panel-title>
+      <mat-panel-description>
+        {{fruitGoal.goalQuantity}} portions a day
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+      <ul *ngFor="let act of fruitActivities">
+        <li *ngFor="let a of act">
+          <p>Activity: {{a.quantity}} portions </p> 
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button> 
+        </li>
+      </ul>
+    
+    <mat-action-row>
+      <button mat-button color="primary" (click)="updateGoal('fruitGoal', fruitGoal)">Update</button>
+      <button mat-button color="primary" (click)="deleteGoal('fruitGoal', fruitGoal)">Delete</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngIf="vegGoal">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Vegetable goal
+      </mat-panel-title>
+      <mat-panel-description>
+        {{vegGoal.goalQuantity}} portions a day
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+      <ul *ngFor="let act of vegActivities">
+        <li *ngFor="let a of act">
+          <p>Activity: {{a.quantity}} portions </p>  
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button>
+        </li>
+      </ul>
+    
+    <mat-action-row>
+      <button mat-button color="primary" (click)="updateGoal('vegGoal', vegGoal)">Update</button>
+      <button mat-button color="primary" (click)="deleteGoal('vegGoal', vegGoal)">Delete</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngIf="natureGoal">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Nature goal
+      </mat-panel-title>
+      <mat-panel-description>
+        {{natureGoal.goalQuantity}} minutes, {{natureGoal.frequency}} times a week
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+      <ul *ngFor="let act of natureActivities">
+        <li *ngFor="let a of act">
+          <p>Activity: {{a.quantity}} minutes </p>  
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button>
+        </li>
+      </ul>
+    
+    <mat-action-row>
+      <button mat-button color="primary" (click)="updateGoal('natureGoal', natureGoal)">Update</button>
+      <button mat-button color="primary" (click)="deleteGoal('natureGoal', natureGoal)">Delete</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+  <mat-expansion-panel *ngIf="meditationGoal">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Meditation goal
+      </mat-panel-title>
+      <mat-panel-description>
+        {{meditationGoal.goalQuantity}} minutes, {{meditationGoal.frequency}} times a week
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+      <ul *ngFor="let act of meditationActivities">
+        <li *ngFor="let a of act">
+          <p>Activity: {{a.quantity}} minutes </p>  
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button>
+        </li>
+      </ul>
+    
+    <mat-action-row>
+      <button color="primary" (click)="updateGoal('meditationGoal', meditationGoal)">Update</button>
+      <button color="primary" (click)="deleteGoal('meditationGoal', meditationGoal)">Delete</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<!--  <table class="table">
     <thead>
       <tr>
         <th scope="col">Name</th>
@@ -66,5 +201,5 @@
             <button (click)="deleteGoal('fruitGoal',fruitGoal)">Delete</button>
         </tr>
         </tbody>
-    </table>
+    </table>-->
   </div>
