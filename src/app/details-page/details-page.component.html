@@ -23,11 +23,11 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul class="container" *ngFor="let act of workoutActivities">
-        <li class="row" *ngFor="let a of act">
+      <ul class="container">
+        <li class="row"  *ngFor="let act of workoutActivities">
           <p class="col">Activity:  </p> 
-          <p class="col"> {{a.quantity}} minutes </p>
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button>
+          <p class="col"> {{act.quantity}} minutes </p>
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button>
         </li>
       </ul>
     
@@ -46,10 +46,10 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul *ngFor="let act of sleepActivities">
-        <li *ngFor="let a of act">
-          <p>Activity: {{a.quantity}} hours </p>  
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button>
+      <ul>
+        <li *ngFor="let act of sleepActivities">
+          <p>Activity: {{act.quantity}} hours </p>  
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button>
         </li>
       </ul>
     
@@ -68,10 +68,10 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul *ngFor="let act of fruitActivities">
-        <li *ngFor="let a of act">
-          <p>Activity: {{a.quantity}} portions </p> 
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button> 
+      <ul >
+        <li *ngFor="let act of fruitActivities">
+          <p>Activity: {{act.quantity}} portions </p> 
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button> 
         </li>
       </ul>
     
@@ -90,10 +90,10 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul *ngFor="let act of vegActivities">
-        <li *ngFor="let a of act">
-          <p>Activity: {{a.quantity}} portions </p>  
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button>
+      <ul>
+        <li *ngFor="let act of vegActivities">
+          <p>Activity: {{act.quantity}} portions </p>  
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button>
         </li>
       </ul>
     
@@ -112,10 +112,10 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul *ngFor="let act of natureActivities">
-        <li *ngFor="let a of act">
-          <p>Activity: {{a.quantity}} minutes </p>  
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button>
+      <ul>
+        <li *ngFor="let act of natureActivities">
+          <p>Activity: {{act.quantity}} minutes </p>  
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button>
         </li>
       </ul>
     
@@ -134,10 +134,10 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul *ngFor="let act of meditationActivities">
-        <li *ngFor="let a of act">
-          <p>Activity: {{a.quantity}} minutes </p>  
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(a.id)">Delete</button>
+      <ul>
+        <li *ngFor="let act of meditationActivities">
+          <p>Activity: {{act.quantity}} minutes </p>  
+          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button>
         </li>
       </ul>
     
@@ -147,59 +147,4 @@
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
-<!--  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">goalQuantity</th>
-        <th scope="col">frequency</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr *ngIf="workoutGoal">
-            <td>Workout Goal</td>
-            <td>{{workoutGoal.goalQuantity}}</td>
-            <td>{{workoutGoal.frequency}}</td>
-            <button (click)="updateGoal('Workout', workoutGoal)">Update</button>
-            <button (click)="deleteGoal('workoutGoal', workoutGoal)">Delete</button>
-        </tr>
-        <tr *ngIf="meditationGoal">
-            <td>Meditation Goal</td>
-            <td>{{meditationGoal.goalQuantity}}</td>
-            <td>{{meditationGoal.frequency}}</td>
-            <button (click)="updateGoal('Meditation', meditationGoal)">Update</button>
-            <button (click)="deleteGoal('meditationGoal', meditationGoal)">Delete</button>
-        </tr>
-        <tr *ngIf="natureGoal">
-            <td>Nature Goal</td>
-            <td>{{natureGoal.goalQuantity}}</td>
-            <td>{{natureGoal.frequency}}</td>
-            <button (click)="updateGoal('Nature',natureGoal)">Update</button>
-            <button (click)="deleteGoal('natureGoal', natureGoal)">Delete</button>
-        </tr>
-        <tr *ngIf="sleepGoal">
-            <td>Sleep Goal</td>
-            <td>{{sleepGoal.goalQuantity}}</td>
-            <td></td>
-            <button (click)="updateGoal('Sleep', sleepGoal)">Update</button>
-            <button (click)="deleteGoal('sleepGoal', sleepGoal)">Delete</button>
-          </tr>
-          <tr *ngIf="vegGoal">
-            <td>Vegetable Goal</td>
-            <td>{{vegGoal.goalQuantity}}</td>
-            <td></td>
-            <button (click)="updateGoal('Vegetable', vegGoal)">Update</button>
-            <button (click)="deleteGoal('vegGoal', vegGoal)">Delete</button>
-          </tr>
-        <tr *ngIf="fruitGoal">
-            <td>Fruit Goal</td>
-            <td>{{fruitGoal.goalQuantity}}</td>
-            <td></td>
-            <button (click)="updateGoal('Fruit', fruitGoal)">Update</button>
-            <button (click)="deleteGoal('fruitGoal',fruitGoal)">Delete</button>
-        </tr>
-        </tbody>
-    </table>-->
   </div>

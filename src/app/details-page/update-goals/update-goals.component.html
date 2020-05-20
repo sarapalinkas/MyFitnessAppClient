@@ -1,10 +1,10 @@
-<h1 mat-dialog-title>Update {{data.goaltype}} Goal</h1>
+<h1 mat-dialog-title>Update Goal</h1>
 <div mat-dialog-content>
   <mat-form-field>
     <mat-label>Quantity</mat-label>
     <input matInput value="{{data.quantity}}" [(ngModel)]="data.quantity" >
   </mat-form-field>
-  <mat-form-field *ngIf="data.goaltype == 'Workout' || this.data.goaltype == 'Meditation' || this.data.goaltype== 'Nature'">
+  <mat-form-field *ngIf="data.goaltype == 'workoutGoal' || this.data.goaltype == 'meditationGoal' || this.data.goaltype== 'natureGoal'">
     <mat-label>Frequency</mat-label>
     <input matInput [(ngModel)]="data.frequency" value="{{frequency}}">
   </mat-form-field>

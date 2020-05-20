@@ -1,5 +1,5 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { CalendarView, CalendarEvent } from 'angular-calendar';
+import { Component, OnInit, NgZone, ChangeDetectorRef } from '@angular/core';
+import { CalendarView, CalendarEvent, CalendarMonthViewBeforeRenderEvent, CalendarWeekViewBeforeRenderEvent, CalendarViewPeriod } from 'angular-calendar';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AddGoalDialogComponent } from './add-goal-dialog/add-goal-dialog.component';
 import { WorkoutGoal } from '../model/workout.model';
@@ -11,7 +11,7 @@ import { VegGoal } from '../model/veg.model';
 import { SleepGoal } from '../model/sleep.model';
 import { AddActivityDialogComponent } from './add-activity-dialog/add-activity-dialog.component';
 import { Activity } from '../model/activity.model';
-import { CalendarEventActionsComponent } from 'angular-calendar/modules/common/calendar-event-actions.component';
+import { Subject } from 'rxjs';
 
 export interface DialogData {
   quantity: string;
@@ -32,26 +32,23 @@ export class MainPageComponent implements OnInit {
   veg: VegGoal;
   sleep: SleepGoal;
 
+  chosenAct: string;
+  current_act: Array<Activity> = [];
+  items: Array<CalendarEvent<{ time: any }>> = [];
   activities = ["Workout", "Sleep", "Fruit", "Vegetable", "Nature", "Meditation"];
   quantity: number;
   act_quantity: number;
   frequency: number;
   view: CalendarView = CalendarView.Week;
-  startdate = new Date('2020-05-15T00:00:00.000Z');
-  events: CalendarEvent[] = [
-      {
-        start: this.startdate,
-        title: 'Myevent',
-      }
-  ];
-  public myevent: CalendarEvent;
-
+  events: CalendarEvent[] = [];
+  refresh: Subject<any> = new Subject();
   CalendarView = CalendarView;
-
+  period: CalendarViewPeriod;
   viewDate: Date = new Date();
   constructor(public dialog: MatDialog,
     private httpClientService: HttpClientService,
-    private zone: NgZone) { }
+    private zone: NgZone,
+    private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.getWorkoutgoal();
@@ -62,6 +59,142 @@ export class MainPageComponent implements OnInit {
     this.getMeditationgoal();
     this.goals;
 
+    this.httpClientService.getActivities("Nature").subscribe(
+      act => 
+      {
+        this.current_act = act.slice();
+        this.current_act.forEach((act) =>
+      {
+        if(act.time != null)
+        {
+          this.items.push({
+            title: act.goalType,
+            start: new Date(act.time),
+          })
+        }
+      });
+      });
+    
+    this.httpClientService.getActivities("Workout").subscribe(
+      act => 
+      {
+        this.current_act = act.slice();
+        this.current_act.forEach((act) =>
+      {
+        if(act.time != null)
+        {
+          this.items.push({
+            title: act.goalType,
+            start: new Date(act.time),
+          })
+        }
+      });
+      });
+    
+    this.httpClientService.getActivities("Sleep").subscribe(
+      act => 
+      {
+        this.current_act = act.slice();
+        this.current_act.forEach((act) =>
+      {
+        if(act.time != null)
+        {
+          this.items.push({
+            title: act.goalType,
+            start: new Date(act.time),
+          })
+        }
+      });
+      });
+  
+    this.httpClientService.getActivities("Fruit").subscribe(
+      act => 
+      {
+        this.current_act = act.slice();
+        this.current_act.forEach((act) =>
+      {
+        if(act.time != null)
+        {
+          this.items.push({
+            title: act.goalType,
+            start: new Date(act.time),
+          })
+        }
+      });
+      });
+    this.httpClientService.getActivities("Veg").subscribe(
+      act => 
+      {
+        this.current_act = act.slice();
+        this.current_act.forEach((act) =>
+      {
+        if(act.time != null)
+        {
+          this.items.push({
+            title: act.goalType,
+            start: new Date(act.time),
+          })
+        }
+      });
+      });
+      this.httpClientService.getActivities("Meditation").subscribe(
+        act => 
+        {
+          this.current_act = act.slice();
+          this.current_act.forEach((act) =>
+        {
+          if(act.time != null)
+          {
+            this.items.push({
+              title: act.goalType,
+              start: new Date(act.time),
+            })
+          }
+        });
+        this.events = this.items;
+        });
+    
+  }
+
+  beforeViewRender(
+    event: CalendarWeekViewBeforeRenderEvent
+  ) {
+    this.period = event.period;
+    this.cdr.detectChanges();
+  }
+  func(event: any)
+  {
+    const dialogRef = this.dialog.open(AddActivityDialogComponent, {
+      width: '250px',
+      data: {quantity: this.quantity, activity: this.chosenAct}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result.chosenAct);
+      this.createActivity(result.chosenAct, result, event.date);
+      this.events = [
+        ...this.events,
+        {
+          title: result.chosenAct,
+          start: event.date,
+        },
+      ];
+    }
+    );
+
+
+  }
+  public addActivity(goaltype : string): void
+  {
+    const dialogRef = this.dialog.open(AddActivityDialogComponent, {
+      width: '250px',
+      data: {quantity: this.quantity,}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.createActivity(goaltype, result, new Date().toString());
+    }
+    );
   }
 
   public get goals()
@@ -79,18 +212,8 @@ export class MainPageComponent implements OnInit {
     return goals;
   }
 
-  public addActivity(goaltype : string): void
-  {
-    const dialogRef = this.dialog.open(AddActivityDialogComponent, {
-      width: '250px',
-      data: {quantity: this.quantity,}
-    });
+ 
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.createActivity(goaltype, result);
-    }
-    );
-  }
   public addGoal(goaltype : any): void 
   {
     const dialogRef = this.dialog.open(AddGoalDialogComponent, {
@@ -103,13 +226,11 @@ export class MainPageComponent implements OnInit {
     });
   }
 
-  createActivity(goaltype: any, result: any): void {
-    var activity = new Activity(null, goaltype, result.quantity, null);
+  createActivity(goaltype: any, result: any, date:any): void {
+    console.log(result);
+    var activity = new Activity(null, goaltype, result.quantity, null, date);
     this.httpClientService.createActivity(activity)
         .subscribe( data => {
-          this.zone.runOutsideAngular(() => {
-            window.location.href = '';
-          });
         });
 
   };

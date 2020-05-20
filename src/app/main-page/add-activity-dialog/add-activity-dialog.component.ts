@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../main-page.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-add-activity-dialog',
@@ -9,9 +10,12 @@ import { DialogData } from '../main-page.component';
 })
 export class AddActivityDialogComponent implements OnInit {
 
+  goals = ["Workout", "Sleep", "Fruit", "Vegetable", "Nature", "Meditation"];
+
   constructor(public dialogRef: MatDialogRef<AddActivityDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  
   ngOnInit(): void {
   }
 

@@ -48,7 +48,7 @@ export class HttpClientService {
    }
 
   getActivities(type){
-    return this.httpClient.get<Activity>
+    return this.httpClient.get<Activity[]>
     ('http://localhost:8080/activities' + "/"+ type);
   }
 
@@ -107,8 +107,9 @@ export class HttpClientService {
   }
 
   public updateSleepGoal(sleepgoal) {
+    console.log('http');
     return this.httpClient.put<SleepGoal>
-     ("http://localhost:8080/goal/sleepgoal", sleepgoal);
+     ("http://localhost:8080/goals/sleepgoal", sleepgoal);
    }
 
    getFruitgoal(){

@@ -4,5 +4,6 @@ export class Activity{
       public goalType: string,
       public quantity: number,
       public currentWeek: number,
+      public time: string
     ) {}
   }

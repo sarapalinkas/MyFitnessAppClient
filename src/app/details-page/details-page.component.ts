@@ -24,7 +24,7 @@ export interface UpdateDialogData {
 })
 export class DetailsPageComponent implements OnInit {
 
-  public userName: string;
+  public _userName: string = this.authenticationService.getUser();
   public quantity: number;
   public frequency: number;
 
@@ -59,7 +59,7 @@ export class DetailsPageComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.userName = this.authenticationService.getUser();
+    
     this.httpClientService.getWorkoutgoal().subscribe(
       result => this.workoutGoal = result
     );
@@ -82,24 +82,23 @@ export class DetailsPageComponent implements OnInit {
       result => this.medals = Array(result)
     );
     this.httpClientService.getActivities('Workout').subscribe(
-      result => this.workoutActivities = Array(result)
+      result => this.workoutActivities =result.slice()
     );
     this.httpClientService.getActivities('Sleep').subscribe(
-      result => this.sleepActivities = Array(result)
+      result => this.sleepActivities =result.slice()
     );
     this.httpClientService.getActivities('Fruit').subscribe(
-      result => this.fruitActivities = Array(result)
+      result => this.fruitActivities =result.slice()
     );
     this.httpClientService.getActivities('Vegetable').subscribe(
-      result => this.vegActivities = Array(result)
+      result => this.vegActivities =result.slice()
     );
     this.httpClientService.getActivities('Meditation').subscribe(
-      result => this.meditationActivities = Array(result)
+      result => this.meditationActivities =result.slice()
     );
     this.httpClientService.getActivities('Nature').subscribe(
-      result => this.natureActivities = Array(result)
+      result => this.natureActivities =result.slice()
     );
-    console.log(new Date());
 
   }
 
@@ -116,16 +115,18 @@ export class DetailsPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       this.update(goaltype, result);
     });
     
   
   }
 
+  get userName(): string {
+    return this._userName;
+}
+
   public deleteActivity(id: number): void
   {
-    console.log(id);
     this.httpClientService.deleteActivity(id).subscribe();
   }
 
@@ -168,7 +169,8 @@ export class DetailsPageComponent implements OnInit {
   update(goaltype: any, result: any): void
   {
     switch(goaltype){
-      case 'Workout': {
+      case 'workoutGoal': {
+      
         var wg = new WorkoutGoal(null, result.quantity, result.frequency, null, 0, null, null);
         this.httpClientService.updateWorkoutgoal(wg)
         .subscribe( data => {
@@ -178,7 +180,7 @@ export class DetailsPageComponent implements OnInit {
         });
       break;
       }
-      case 'Sleep': {
+      case 'sleepGoal': {
         var sg = new SleepGoal(null, result.quantity, null, 0, null, null);
         this.httpClientService.updateSleepGoal(sg)
         .subscribe( data => {
@@ -188,7 +190,7 @@ export class DetailsPageComponent implements OnInit {
         });
         break;
       }
-      case 'Fruit': {
+      case 'fruitGoal': {
         var fg = new FruitGoal(null, result.quantity, null, 0, null, null, null);
         this.httpClientService.updateFruitGoal(fg)
         .subscribe( data => {
@@ -198,7 +200,7 @@ export class DetailsPageComponent implements OnInit {
         });
         break;
       }
-      case 'Vegetable': {
+      case 'vegetableGoal': {
         var vg = new VegGoal(null, result.quantity, null, 0, null, null);
         this.httpClientService.updateVegGoal(vg)
         .subscribe( data => {
@@ -208,7 +210,7 @@ export class DetailsPageComponent implements OnInit {
         });
         break;
       }
-      case 'Nature': {
+      case 'natureGoal': {
         var ng = new NatureGoal(null, result.quantity, result.frequency, null, 0, null, null);
         this.httpClientService.updateNatureGoal(ng)
         .subscribe( data => {
@@ -218,7 +220,7 @@ export class DetailsPageComponent implements OnInit {
         });
         break;
       }
-      case 'Meditation': {
+      case 'meditationGoal': {
         var mg = new MeditationGoal(null, result.quantity, result.frequency, null, 0, null, null);
         this.httpClientService.updateMeditationGoal(mg)
         .subscribe( data => {

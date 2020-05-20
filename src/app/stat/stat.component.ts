@@ -32,69 +32,116 @@ export class StatComponent implements OnInit {
 
   public workoutGoalDataPoints: any[] =[];
   public workoutActivityDataPoints: any[] =[];
+  public natureGoalDataPoints: any[] =[];
+  public natureActivityDataPoints: any[] =[];
+  public meditationGoalDataPoints: any[] =[];
+  public meditationActivityDataPoints: any[] =[];
+  public sleepGoalDataPoints: any[] =[];
+  public sleepActivityDataPoints: any[] =[];
+  public fruitGoalDataPoints: any[] =[];
+  public fruitActivityDataPoints: any[] =[];
+  public vegGoalDataPoints: any[] =[];
+  public vegActivityDataPoints: any[] =[];
+
+  public workoutChart = false;
+  public sleepChart = false;
+
+  public counter: number = 0;
+  
   constructor(private httpClientService: HttpClientService) { }
   
 
   ngOnInit(): void {
     this.httpClientService.getPastWorkoutGoals().subscribe(
-      result => 
+      goal => 
       {
-        this.pastWorkoutGoals = result;
-        this.getWorkoutGoalData(); 
-        console.log(this.workoutGoalDataPoints);
+        this.pastWorkoutGoals = goal;
+        this.httpClientService.getPastActivities("Workout").subscribe(
+          act => 
+          {
+            this.pastWorkoutActivities = act;
+            this.getWorkoutData();
+         //   workoutchart.render();
+          });
       }
     );
-    this.httpClientService.getPastActivities("Workout").subscribe(
-      result => 
-      {
-        this.pastWorkoutActivities = result;
-        this.getWorkoutActivityData();
-        console.log(this.workoutActivityDataPoints);
-        workoutchart.render();
-      }
-
-        
-    );
+    
     this.httpClientService.getPastSleepGoals().subscribe(
-      result => this.pastSleepGoals = result
+      goal => 
+      {
+        this.pastSleepGoals = goal;
+        this.httpClientService.getPastActivities("Sleep").subscribe(
+          act => 
+          {
+            this.pastSleepActivities = act;
+            this.getSleepData();
+        //    sleepchart.render();
+          });
+      }
     );
+
     this.httpClientService.getPastFruitGoals().subscribe(
-      result => this.pastFruitGoals = result
+      goal => 
+      {
+        this.pastFruitGoals = goal;
+        this.httpClientService.getPastActivities("Fruit").subscribe(
+          act => 
+          {
+            this.pastFruitActivities = act;
+            this.getFruitData();
+        //    fruitchart.render();
+          });
+      }
     );
     this.httpClientService.getPastVegGoals().subscribe(
-      result => this.pastVegGoals = result
+      goal => 
+      {
+        this.pastVegGoals = goal;
+        this.httpClientService.getPastActivities("Vegetable").subscribe(
+          act => 
+          {
+            this.pastVegActivities = act;
+            this.getVegData();
+         //   vegchart.render();
+          });
+      }
     );
     this.httpClientService.getPastNatureGoals().subscribe(
-      result => this.pastNatureGoals = result
+      goal => 
+      {
+        this.pastNatureGoals = goal;
+        this.httpClientService.getPastActivities("Nature").subscribe(
+          act => 
+          {
+            this.pastNatureActivities = act;
+            this.getNatureData();
+         //   naturechart.render();
+          });
+      }
     );
     this.httpClientService.getPastMeditationGoals().subscribe(
-      result => this.pastMeditationGoals = result
+      goal => 
+      {
+        this.pastMeditationGoals = goal;
+        this.httpClientService.getPastActivities("Meditation").subscribe(
+          act => 
+          {
+            this.pastMeditationActivities = act;
+            this.getMeditationData();
+         //   meditationchart.render();
+         workoutchart.render();
+      sleepchart.render();
+      fruitchart.render();
+      vegchart.render();
+      naturechart.render();
+      meditationchart.render();
+          });
+      }
     );
-    this.httpClientService.getPastMeditationGoals().subscribe(
-      result => this.pastMeditationGoals = result
-    );
-
-    this.httpClientService.getPastActivities("Sleep").subscribe(
-      result => this.pastSleepActivities = result
-    );
-    this.httpClientService.getPastActivities("Fruit").subscribe(
-      result => this.pastFruitActivities = result
-    );
-    this.httpClientService.getPastActivities("Vegetable").subscribe(
-      result => this.pastVegActivities = result
-    );
-    this.httpClientService.getPastActivities("Nature").subscribe(
-      result => this.pastNatureActivities = result
-    );
-    this.httpClientService.getPastActivities("Meditation").subscribe(
-      result => this.pastMeditationActivities = result
-    );
-
 
     var workoutchart = new CanvasJS.Chart("workout-chart", {
       animationEnabled: true,
       title:{
-        text: "Past Workout Goals and Activities"
       },	
       axisY: {
         title: "Workout in minutes",
@@ -125,53 +172,313 @@ export class StatComponent implements OnInit {
         dataPoints:this.workoutActivityDataPoints
       }]
     });
+
+    var naturechart = new CanvasJS.Chart("nature-chart", {
+      animationEnabled: true,
+      title:{
+      },	
+      axisY: {
+        title: "Time in nature in minutes",
+        titleFontColor: "#4F81BC",
+        lineColor: "#4F81BC",
+        labelFontColor: "#4F81BC",
+        tickColor: "#4F81BC"
+      },
+      toolTip: {
+        shared: true
+      },
+      legend: {
+        cursor:"pointer",
+      },
+      data: [{
+        type: "column",
+        name: "Goal (mins)",
+        legendText: "Goal",
+        showInLegend: true, 
+        dataPoints:this.natureGoalDataPoints
+      },
+      {
+        type: "column",	
+        name: "All activities (mins)",
+        legendText: "All activities",
+        axisYType: "primary",
+        showInLegend: true,
+        dataPoints:this.natureActivityDataPoints
+      }]
+    });
     
-  
+    var meditationchart = new CanvasJS.Chart("meditation-chart", {
+      animationEnabled: true,
+      title:{
+      },	
+      axisY: {
+        title: "Meditation in minutes",
+        titleFontColor: "#4F81BC",
+        lineColor: "#4F81BC",
+        labelFontColor: "#4F81BC",
+        tickColor: "#4F81BC"
+      },
+      toolTip: {
+        shared: true
+      },
+      legend: {
+        cursor:"pointer",
+      },
+      data: [{
+        type: "column",
+        name: "Goal (mins)",
+        legendText: "Goal",
+        showInLegend: true, 
+        dataPoints:this.meditationGoalDataPoints
+      },
+      {
+        type: "column",	
+        name: "All activities (mins)",
+        legendText: "All activities",
+        axisYType: "primary",
+        showInLegend: true,
+        dataPoints:this.meditationActivityDataPoints
+      }]
+    });
+
+    var sleepchart = new CanvasJS.Chart("sleep-chart", {
+      animationEnabled: true,
+      title:{
+      },	
+      axisY: {
+        title: "Daily sleep goal in hours",
+        titleFontColor: "#4F81BC",
+        lineColor: "#4F81BC",
+        labelFontColor: "#4F81BC",
+        tickColor: "#4F81BC"
+      },
+      toolTip: {
+        shared: true
+      },
+      legend: {
+        cursor:"pointer",
+      },
+      data: [{
+        type: "column",
+        name: "Goal (hours)",
+        legendText: "Goal",
+        showInLegend: true, 
+        dataPoints:this.sleepGoalDataPoints
+      },
+      {
+        type: "column",	
+        name: "Avg sleep per day (hours)",
+        legendText: "Avg sleep per day",
+        axisYType: "primary",
+        showInLegend: true,
+        dataPoints:this.sleepActivityDataPoints
+      }]
+    });
+
+    var fruitchart = new CanvasJS.Chart("fruit-chart", {
+      animationEnabled: true,
+      title:{
+      },	
+      axisY: {
+        title: "Daily fruit goal in portions",
+        titleFontColor: "#4F81BC",
+        lineColor: "#4F81BC",
+        labelFontColor: "#4F81BC",
+        tickColor: "#4F81BC"
+      },
+      toolTip: {
+        shared: true
+      },
+      legend: {
+        cursor:"pointer",
+      },
+      data: [{
+        type: "column",
+        name: "Goal (portions)",
+        legendText: "Goal",
+        showInLegend: true, 
+        dataPoints:this.fruitGoalDataPoints
+      },
+      {
+        type: "column",	
+        name: "Avg fruit per day (portions)",
+        legendText: "Avg fruit per day",
+        axisYType: "primary",
+        showInLegend: true,
+        dataPoints:this.fruitActivityDataPoints
+      }]
+    });
+
+    var vegchart = new CanvasJS.Chart("veg-chart", {
+      animationEnabled: true,
+      title:{
+      },	
+      axisY: {
+        title: "Daily vegetable goal in portions",
+        titleFontColor: "#4F81BC",
+        lineColor: "#4F81BC",
+        labelFontColor: "#4F81BC",
+        tickColor: "#4F81BC"
+      },
+      toolTip: {
+        shared: true
+      },
+      legend: {
+        cursor:"pointer",
+      },
+      data: [{
+        type: "column",
+        name: "Goal (portions)",
+        legendText: "Goal",
+        showInLegend: true, 
+        dataPoints:this.vegGoalDataPoints
+      },
+      {
+        type: "column",	
+        name: "Avg vegetable per day (portions)",
+        legendText: "Avg vegetable per day",
+        axisYType: "primary",
+        showInLegend: true,
+        dataPoints:this.vegActivityDataPoints
+      }]
+    });
+
+
+
   }
 
-  public getWorkoutGoalData()
+  
+  public getWorkoutData()
   {
-    this.pastWorkoutGoals.forEach( (element) => {
-      console.log(element.id);
-      var week ="Week "+element.currentWeek.toString().slice(-2);
-      var mins = element.goalQuantity*element.frequency;
+    this.pastWorkoutGoals.sort((a, b) => (a.currentWeek > b.currentWeek) ? 1 : -1);
+    this.pastWorkoutGoals.forEach( (goal) => {  
+      var gweek = +goal.currentWeek.toString().slice(-2);
+      var week = "Week "+goal.currentWeek.toString().slice(-2);
+      var gmins = goal.goalQuantity*goal.frequency;
+      var actmins = 0;
+      this.pastWorkoutActivities.forEach((act) => {
+        if(gweek === act.currentWeek){actmins += act.quantity;}
+      });
       this.workoutGoalDataPoints.push({ 
         label: week, 
-        y: mins		
+        y: gmins		
+      });
+      this.workoutActivityDataPoints.push({ 
+        label: week,
+        y: actmins		
       });
     });
-  }
-  public getWorkoutActivityData()
-  {
-    var currweek = 0;
-    //var mins;
-    var weeks: number[] = [];
-    var mins : number[] = [];
-    this.pastWorkoutActivities.forEach((element) =>
-    {
-      if(weeks.includes(element.currentWeek))
-      {
-        var x = mins.pop();
-        x += element.quantity;
-        mins.push(x);
+  } 
 
-      }
-      else
-      {
-        weeks.push(element.currentWeek);
-        mins.push(element.quantity);
-      }
-    })
-    for(let i = 0; i<mins.length; i++)
-    {
-      this.workoutActivityDataPoints.push({ 
-        label: "Week "+weeks[i], 
-        y: mins[i]		
+
+public getNatureData()
+  {
+    this.pastNatureGoals.sort((a, b) => (a.currentWeek > b.currentWeek) ? 1 : -1);
+    this.pastNatureGoals.forEach( (goal) => {  
+      var gweek = +goal.currentWeek.toString().slice(-2);
+      var week = "Week "+goal.currentWeek.toString().slice(-2);
+      var gmins = goal.goalQuantity*goal.frequency;
+      var actmins = 0;
+      this.pastNatureActivities.forEach((act) => {
+        if(gweek === act.currentWeek){actmins += act.quantity;}
       });
-    }
-    
-  }
- 
+      this.natureGoalDataPoints.push({ 
+        label: week, 
+        y: gmins		
+      });
+      this.natureActivityDataPoints.push({ 
+        label: week,
+        y: actmins		
+      });
+    });
+  } 
+  public getMeditationData()
+  {
+    this.pastMeditationGoals.sort((a, b) => (a.currentWeek > b.currentWeek) ? 1 : -1);
+    this.pastMeditationGoals.forEach( (goal) => {  
+      var gweek = +goal.currentWeek.toString().slice(-2);
+      var week = "Week "+goal.currentWeek.toString().slice(-2);
+      var gmins = goal.goalQuantity*goal.frequency;
+      var actmins = 0;
+      this.pastMeditationActivities.forEach((act) => {
+        if(gweek === act.currentWeek){actmins += act.quantity;}
+      });
+      this.meditationGoalDataPoints.push({ 
+        label: week, 
+        y: gmins		
+      });
+      this.meditationActivityDataPoints.push({ 
+        label: week,
+        y: actmins		
+      });
+    });
+  } 
+  public getSleepData()
+  {
+    this.pastSleepGoals.sort((a, b) => (a.currentWeek > b.currentWeek) ? 1 : -1);
+    this.pastSleepGoals.forEach( (goal) => {  
+      var gweek = +goal.currentWeek.toString().slice(-2);
+      var week = "Week "+goal.currentWeek.toString().slice(-2);
+      var gmins = goal.goalQuantity;
+      var actmins = 0;
+      this.pastSleepActivities.forEach((act) => {
+        if(gweek === act.currentWeek){actmins += act.quantity;}
+      });
+      actmins = actmins/7;
+      this.sleepGoalDataPoints.push({ 
+        label: week, 
+        y: gmins		
+      });
+      this.sleepActivityDataPoints.push({ 
+        label: week,
+        y: actmins		
+      });
+    });
+  } 
+  public getFruitData()
+  {
+    this.pastFruitGoals.sort((a, b) => (a.currentWeek > b.currentWeek) ? 1 : -1);
+    this.pastFruitGoals.forEach( (goal) => {  
+      var gweek = +goal.currentWeek.toString().slice(-2);
+      var week = "Week "+goal.currentWeek.toString().slice(-2);
+      var gmins = goal.goalQuantity;
+      var actmins = 0;
+      this.pastFruitActivities.forEach((act) => {
+        if(gweek === act.currentWeek){actmins += act.quantity;}
+      });
+      actmins = actmins/7;
+      this.fruitGoalDataPoints.push({ 
+        label: week, 
+        y: gmins		
+      });
+      this.fruitActivityDataPoints.push({ 
+        label: week,
+        y: actmins		
+      });
+    });
+  } 
+  public getVegData()
+  {
+    this.pastVegGoals.sort((a, b) => (a.currentWeek > b.currentWeek) ? 1 : -1);
+    this.pastVegGoals.forEach( (goal) => {  
+      var gweek = +goal.currentWeek.toString().slice(-2);
+      var week = "Week "+goal.currentWeek.toString().slice(-2);
+      var gmins = goal.goalQuantity;
+      var actmins = 0;
+      this.pastVegActivities.forEach((act) => {
+        if(gweek === act.currentWeek){actmins += act.quantity;}
+      });
+      actmins = actmins/7;
+      this.vegGoalDataPoints.push({ 
+        label: week, 
+        y: gmins		
+      });
+      this.vegActivityDataPoints.push({ 
+        label: week,
+        y: actmins		
+      });
+    });
+  } 
   
 }
 

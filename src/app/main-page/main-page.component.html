@@ -26,10 +26,13 @@
             <mwl-calendar-week-view
                 [viewDate]="viewDate"
                 [events]="events"
+                [refresh]="refresh"
                 [dayStartHour]=4
                 [dayEndHour]=23
                 [weekStartsOn]=2
                 [hourSegments]=1
+                (hourSegmentClicked)="func($event)"
+                (beforeViewRender)="beforeViewRender($event)"
                 
             >
             </mwl-calendar-week-view>

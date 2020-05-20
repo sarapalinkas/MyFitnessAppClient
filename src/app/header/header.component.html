@@ -8,6 +8,7 @@
       <li><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/register" class="nav-link">Register</a></li>
       <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/user" class="nav-link">User</a></li>
       <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/stat" class="nav-link">Statistics</a></li>
+      
     </ul> 
     <ul class="nav navbar-nav navbar-right">
       <li ><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>

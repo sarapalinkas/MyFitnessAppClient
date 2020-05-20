@@ -27,6 +27,7 @@ import { AddGoalDialogComponent } from './main-page/add-goal-dialog/add-goal-dia
 import { AddActivityDialogComponent } from './main-page/add-activity-dialog/add-activity-dialog.component';
 import { DetailsPageComponent } from './details-page/details-page.component';
 import { UpdateGoalsComponent } from './details-page/update-goals/update-goals.component';
+import {MatSelectModule} from '@angular/material/select';
 import { StatComponent } from './stat/stat.component';
 
 export function momentAdapterFactory() {
@@ -51,6 +52,7 @@ export function momentAdapterFactory() {
   imports: [
     BrowserModule,
     MatIconModule,
+    MatSelectModule,
     MatMenuModule,
     MatExpansionModule,
     MatListModule,
