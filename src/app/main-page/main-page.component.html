@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-1">
-          <div *ngIf="goals.length !== 0">
-            <button  mat-fab [matMenuTriggerFor]="menu">
-            <mat-icon>add</mat-icon>
+        <div class="col-2">
+          <div class="row d-flex justify-content-center pt-2" *ngIf="goals.length !== 0">
+            <button type="button" class="btn btn-info custom" [matMenuTriggerFor]="menu">
+              Add goal  
             </button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item *ngFor="let goal of goals" (click)="addGoal(goal)">
@@ -11,19 +11,15 @@
                 </button>   
             </mat-menu>
             </div> 
-            <div>
-                <button  mat-fab [matMenuTriggerFor]="menu2">
-                    <mat-icon>add</mat-icon>
+            <div class="row d-flex justify-content-center pt-2">
+                <button  type="button" class="btn btn-info custon" (click)="addActivity()">
+                    Add activity
                     </button>
-                    <mat-menu #menu2="matMenu">
-                        <button mat-menu-item *ngFor="let activity of activities" (click)="addActivity(activity)">
-                            <span>{{activity}} activity</span>
-                        </button>   
-                    </mat-menu>
             </div> 
         </div>
-        <div class="col-8">
+        <div class="col-7 mt-2">
             <mwl-calendar-week-view
+            
                 [viewDate]="viewDate"
                 [events]="events"
                 [refresh]="refresh"
@@ -38,7 +34,7 @@
             </mwl-calendar-week-view>
             
         </div>
-        <div class="col-3">
+        <div class="col-3 mt-2">
             <mat-card>
                 <mat-card-header>
                   <mat-card-title>TODO today</mat-card-title>
@@ -58,11 +54,15 @@
                                 <td>Vegetables</td>
                                 <td>{{this.veg.howManyLeft}} portions</td>
                               </tr>
+                              <tr *ngIf="(!this.veg || this.veg.howManyLeft===0) && (!this.fruit || this.fruit.howManyLeft===0)
+                                && (!this.sleep || this.sleep.howManyLeft===0)">
+                                <td>No more tasks for today! </td>
+                              </tr>
                         </tbody>
                     </table>
                 </mat-card-content>
               </mat-card>
-              <mat-card>
+              <mat-card class="mt-2">
                 <mat-card-header>
                   <mat-card-title>TODO this week </mat-card-title>
                 </mat-card-header>
@@ -83,6 +83,10 @@
                                 <td>Time in nature</td>
                                 <td>{{this.nature.goalQuantity}} minutes</td>
                                 <td>{{this.nature.howManyLeft}} times</td>
+                              </tr>
+                              <tr *ngIf="(!this.workout || this.workout.howManyLeft===0) && (!this.meditation || this.meditation.howManyLeft===0)
+                                && (!this.nature || this.nature.howManyLeft===0)">
+                                <td>No more tasks for the week! </td>
                               </tr>
                         </tbody>
                     </table>

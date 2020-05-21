@@ -1,17 +1,20 @@
 <div class="container">
   <div class="row">
-    <h1>Hello {{userName}}!</h1>
+    <h1>Hi!</h1>
   </div>
-  <div class="row">
-<h2>Your Medals</h2>
+
+    <div class="row" *ngIf="medals">
+      <h2>Your Medals:</h2>
+      </div>
+      <div class="row">
+      <div *ngFor="let medal of medals">
+        <mat-icon aria-hidden="false" class="text-warning p-4"  aria-label="Example home icon">emoji_events</mat-icon>
+      </div>
+
 </div>
 <div class="row">
-<div *ngFor="let medal of medals">
-  <mat-icon aria-hidden="false" class="text-warning p-4"  aria-label="Example home icon">emoji_events</mat-icon>
-</div>
-</div>
-
 <h2>Your Goals</h2>
+</div>
 <mat-accordion>
   <mat-expansion-panel *ngIf="workoutGoal">
     <mat-expansion-panel-header>
@@ -27,13 +30,13 @@
         <li class="row"  *ngFor="let act of workoutActivities">
           <p class="col">Activity:  </p> 
           <p class="col"> {{act.quantity}} minutes </p>
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button>
+          <button class="col offset-8 float-right btn btn-info" type="button"  (click)="deleteActivity(act.id)">Delete</button>
         </li>
       </ul>
     
     <mat-action-row>
-      <button mat-button color="primary" (click)="updateGoal('workoutGoal', workoutGoal)">Update</button>
-      <button mat-button color="primary" (click)="deleteGoal('workoutGoal', workoutGoal)">Delete</button>
+      <button type="button" class="btn btn-info" (click)="updateGoal('workoutGoal', workoutGoal)">Update</button>
+      <button type="button" class="btn btn-info" (click)="deleteGoal('workoutGoal', workoutGoal)">Delete</button>
     </mat-action-row>
   </mat-expansion-panel>
   <mat-expansion-panel *ngIf="sleepGoal">
@@ -46,16 +49,17 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul>
-        <li *ngFor="let act of sleepActivities">
-          <p>Activity: {{act.quantity}} hours </p>  
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button>
+      <ul class="container">
+        <li class="row" *ngFor="let act of sleepActivities">
+          <p class="col">Activity: </p>
+           <p class="col">{{act.quantity}} hours </p>  
+          <button class="col offset-8 float-right btn btn-info" type="button" (click)="deleteActivity(act.id)">Delete</button>
         </li>
       </ul>
     
     <mat-action-row>
-      <button mat-button color="primary" (click)="updateGoal('sleepGoal', sleepGoal)">Update</button>
-      <button mat-button color="primary" (click)="deleteGoal('sleepGoal', sleepGoal)">Delete</button>
+      <button type="button" class="btn btn-info" (click)="updateGoal('sleepGoal', sleepGoal)">Update</button>
+      <button type="button" class="btn btn-info" (click)="deleteGoal('sleepGoal', sleepGoal)">Delete</button>
     </mat-action-row>
   </mat-expansion-panel>
   <mat-expansion-panel *ngIf="fruitGoal">
@@ -68,16 +72,17 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul >
-        <li *ngFor="let act of fruitActivities">
-          <p>Activity: {{act.quantity}} portions </p> 
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button> 
+      <ul class="container" >
+        <li class="row" *ngFor="let act of fruitActivities">
+          <p class="col">Activity:  </p> 
+          <p class="col">{{act.quantity}} portions </p> 
+          <button class="col offset-8 float-right btn btn-info" type="button" (click)="deleteActivity(act.id)">Delete</button> 
         </li>
       </ul>
     
     <mat-action-row>
-      <button mat-button color="primary" (click)="updateGoal('fruitGoal', fruitGoal)">Update</button>
-      <button mat-button color="primary" (click)="deleteGoal('fruitGoal', fruitGoal)">Delete</button>
+      <button type="button" class="btn btn-info" (click)="updateGoal('fruitGoal', fruitGoal)">Update</button>
+      <button type="button" class="btn btn-info" (click)="deleteGoal('fruitGoal', fruitGoal)">Delete</button>
     </mat-action-row>
   </mat-expansion-panel>
   <mat-expansion-panel *ngIf="vegGoal">
@@ -90,16 +95,17 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul>
-        <li *ngFor="let act of vegActivities">
-          <p>Activity: {{act.quantity}} portions </p>  
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button>
+      <ul class="container">
+        <li class="row" *ngFor="let act of vegActivities">
+          <p class="col">Activity:</p>   
+          <p class="col">{{act.quantity}} portions </p>  
+          <button class="col offset-8 float-right btn btn-info" type="button" (click)="deleteActivity(act.id)">Delete</button>
         </li>
       </ul>
     
     <mat-action-row>
-      <button mat-button color="primary" (click)="updateGoal('vegGoal', vegGoal)">Update</button>
-      <button mat-button color="primary" (click)="deleteGoal('vegGoal', vegGoal)">Delete</button>
+      <button type="button" class="btn btn-info" (click)="updateGoal('vegGoal', vegGoal)">Update</button>
+      <button type="button" class="btn btn-info" (click)="deleteGoal('vegGoal', vegGoal)">Delete</button>
     </mat-action-row>
   </mat-expansion-panel>
   <mat-expansion-panel *ngIf="natureGoal">
@@ -112,16 +118,17 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul>
-        <li *ngFor="let act of natureActivities">
-          <p>Activity: {{act.quantity}} minutes </p>  
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button>
+      <ul class="container">
+        <li class="row" *ngFor="let act of natureActivities">
+          <p class="col">Activity:</p> 
+          <p class="col">{{act.quantity}} minutes </p>  
+          <button class="col offset-8 float-right btn btn-info" type="button" (click)="deleteActivity(act.id)">Delete</button>
         </li>
       </ul>
     
     <mat-action-row>
-      <button mat-button color="primary" (click)="updateGoal('natureGoal', natureGoal)">Update</button>
-      <button mat-button color="primary" (click)="deleteGoal('natureGoal', natureGoal)">Delete</button>
+      <button type="button" class="btn btn-info" (click)="updateGoal('natureGoal', natureGoal)">Update</button>
+      <button type="button" class="btn btn-info" (click)="deleteGoal('natureGoal', natureGoal)">Delete</button>
     </mat-action-row>
   </mat-expansion-panel>
   <mat-expansion-panel *ngIf="meditationGoal">
@@ -134,17 +141,19 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-      <ul>
-        <li *ngFor="let act of meditationActivities">
-          <p>Activity: {{act.quantity}} minutes </p>  
-          <button class="col offset-8 float-right" mat-button color="primary" (click)="deleteActivity(act.id)">Delete</button>
+      <ul class="container">
+        <li class="row" *ngFor="let act of meditationActivities">
+          <p class="col">Activity: </p> 
+          <p class="col"> {{act.quantity}} minutes </p>  
+          <button class="col offset-8 float-right btn btn-info" type="button" (click)="deleteActivity(act.id)">Delete</button>
         </li>
       </ul>
     
     <mat-action-row>
-      <button color="primary" (click)="updateGoal('meditationGoal', meditationGoal)">Update</button>
-      <button color="primary" (click)="deleteGoal('meditationGoal', meditationGoal)">Delete</button>
+      <button type="button" class="btn btn-info" (click)="updateGoal('meditationGoal', meditationGoal)">Update</button>
+      <button type="button" class="btn btn-info" (click)="deleteGoal('meditationGoal', meditationGoal)">Delete</button>
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
+<div class="row" *ngIf="!meditationGoal && !workoutGoal && !natureGoal && !vegGoal && !fruitGoal && !sleepGoal">You have no goals yet!</div>
   </div>

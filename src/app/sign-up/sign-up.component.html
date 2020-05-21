@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container-fluid">
+  <div class="row pt-2 pl-2">
     <div>
-      User Name : <input type="text" name="username" [(ngModel)]="user.username">
+      Username : <input type="text" name="username" [(ngModel)]="user.username">
       Password : <input type="password" name="password" [(ngModel)]="user.password">
     </div>
-    <button (click)=saveUser() class="btn btn-success">
+    <button (click)=saveUser() type="button" class="btn btn-info ml-3">
       Register
     </button>
   </div>
-
-  
+  </div>

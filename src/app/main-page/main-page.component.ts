@@ -12,6 +12,7 @@ import { SleepGoal } from '../model/sleep.model';
 import { AddActivityDialogComponent } from './add-activity-dialog/add-activity-dialog.component';
 import { Activity } from '../model/activity.model';
 import { Subject } from 'rxjs';
+import { AddDailyActComponent } from './add-daily-act/add-daily-act.component';
 
 export interface DialogData {
   quantity: string;
@@ -35,7 +36,7 @@ export class MainPageComponent implements OnInit {
   chosenAct: string;
   current_act: Array<Activity> = [];
   items: Array<CalendarEvent<{ time: any }>> = [];
-  activities = ["Workout", "Sleep", "Fruit", "Vegetable", "Nature", "Meditation"];
+  activities = ["Sleep", "Fruit", "Vegetable"];
   quantity: number;
   act_quantity: number;
   frequency: number;
@@ -62,7 +63,12 @@ export class MainPageComponent implements OnInit {
     this.httpClientService.getActivities("Nature").subscribe(
       act => 
       {
+        if(act)
+        {
+          
         this.current_act = act.slice();
+
+        }
         this.current_act.forEach((act) =>
       {
         if(act.time != null)
@@ -78,54 +84,12 @@ export class MainPageComponent implements OnInit {
     this.httpClientService.getActivities("Workout").subscribe(
       act => 
       {
-        this.current_act = act.slice();
-        this.current_act.forEach((act) =>
-      {
-        if(act.time != null)
+        if(act)
         {
-          this.items.push({
-            title: act.goalType,
-            start: new Date(act.time),
-          })
-        }
-      });
-      });
-    
-    this.httpClientService.getActivities("Sleep").subscribe(
-      act => 
-      {
+          
         this.current_act = act.slice();
-        this.current_act.forEach((act) =>
-      {
-        if(act.time != null)
-        {
-          this.items.push({
-            title: act.goalType,
-            start: new Date(act.time),
-          })
+
         }
-      });
-      });
-  
-    this.httpClientService.getActivities("Fruit").subscribe(
-      act => 
-      {
-        this.current_act = act.slice();
-        this.current_act.forEach((act) =>
-      {
-        if(act.time != null)
-        {
-          this.items.push({
-            title: act.goalType,
-            start: new Date(act.time),
-          })
-        }
-      });
-      });
-    this.httpClientService.getActivities("Veg").subscribe(
-      act => 
-      {
-        this.current_act = act.slice();
         this.current_act.forEach((act) =>
       {
         if(act.time != null)
@@ -140,7 +104,12 @@ export class MainPageComponent implements OnInit {
       this.httpClientService.getActivities("Meditation").subscribe(
         act => 
         {
-          this.current_act = act.slice();
+          if(act)
+        {
+          
+        this.current_act = act.slice();
+
+        }
           this.current_act.forEach((act) =>
         {
           if(act.time != null)
@@ -162,6 +131,8 @@ export class MainPageComponent implements OnInit {
     this.period = event.period;
     this.cdr.detectChanges();
   }
+
+  
   func(event: any)
   {
     const dialogRef = this.dialog.open(AddActivityDialogComponent, {
@@ -184,15 +155,16 @@ export class MainPageComponent implements OnInit {
 
 
   }
-  public addActivity(goaltype : string): void
+  public addActivity(): void
   {
-    const dialogRef = this.dialog.open(AddActivityDialogComponent, {
+    const dialogRef = this.dialog.open(AddDailyActComponent, {
       width: '250px',
       data: {quantity: this.quantity,}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.createActivity(goaltype, result, new Date().toString());
+      console.log(result);
+      this.createActivity(result.chosenAct, result, new Date().toString());
     }
     );
   }
@@ -223,6 +195,7 @@ export class MainPageComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.createGoal(goaltype, result);
+      console.log("created");
     });
   }
 
@@ -231,10 +204,17 @@ export class MainPageComponent implements OnInit {
     var activity = new Activity(null, goaltype, result.quantity, null, date);
     this.httpClientService.createActivity(activity)
         .subscribe( data => {
+          this.zone.runOutsideAngular(() => {
+            window.location.href = '';
+          });
         });
 
   };
 
+  filterDates = (date: Date): boolean => {
+    let today = new Date();
+    return date < today;
+  }
   createGoal(goaltype: any, result: any): void
   {
     switch(goaltype){

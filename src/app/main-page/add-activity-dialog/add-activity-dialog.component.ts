@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
 })
 export class AddActivityDialogComponent implements OnInit {
 
-  goals = ["Workout", "Sleep", "Fruit", "Vegetable", "Nature", "Meditation"];
+  goals = ["Workout", "Nature", "Meditation"];
 
   constructor(public dialogRef: MatDialogRef<AddActivityDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }

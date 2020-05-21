@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Add Activity</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Quantity</mat-label>
+    <input matInput [(ngModel)]="data.quantity">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Goal type</mat-label>
+    <mat-select [(ngModel)]="data.chosenAct">
+      <mat-option *ngFor="let goal of goals" [value]="goal">
+        {{goal}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data">Add</button>
+</div>

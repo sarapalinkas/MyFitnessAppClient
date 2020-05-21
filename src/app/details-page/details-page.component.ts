@@ -100,6 +100,7 @@ export class DetailsPageComponent implements OnInit {
       result => this.natureActivities =result.slice()
     );
 
+    console.log(this.medals);
   }
 
   public get workoutActivites(): Activity[]
@@ -168,6 +169,7 @@ export class DetailsPageComponent implements OnInit {
 
   update(goaltype: any, result: any): void
   {
+    console.log(goaltype);
     switch(goaltype){
       case 'workoutGoal': {
       
@@ -200,7 +202,7 @@ export class DetailsPageComponent implements OnInit {
         });
         break;
       }
-      case 'vegetableGoal': {
+      case 'vegGoal': {
         var vg = new VegGoal(null, result.quantity, null, 0, null, null);
         this.httpClientService.updateVegGoal(vg)
         .subscribe( data => {

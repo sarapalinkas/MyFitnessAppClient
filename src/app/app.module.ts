@@ -29,6 +29,7 @@ import { DetailsPageComponent } from './details-page/details-page.component';
 import { UpdateGoalsComponent } from './details-page/update-goals/update-goals.component';
 import {MatSelectModule} from '@angular/material/select';
 import { StatComponent } from './stat/stat.component';
+import { AddDailyActComponent } from './main-page/add-daily-act/add-daily-act.component';
 
 export function momentAdapterFactory() {
   return adapterFactory(moment);
@@ -48,6 +49,7 @@ export function momentAdapterFactory() {
     DetailsPageComponent,
     UpdateGoalsComponent,
     StatComponent,
+    AddDailyActComponent,
   ],
   imports: [
     BrowserModule,

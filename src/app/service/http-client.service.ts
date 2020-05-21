@@ -148,6 +148,7 @@ export class HttpClientService {
   }
 
   public updateVegGoal(veggoal) {
+    console.log('Http');
     return this.httpClient.put<VegGoal>
      ("http://localhost:8080/goals/veggoal", veggoal);
    }
