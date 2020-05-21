@@ -48,6 +48,7 @@ export class StatComponent implements OnInit {
 
   public counter: number = 0;
   
+  
   constructor(private httpClientService: HttpClientService) { }
   
 
@@ -139,16 +140,19 @@ export class StatComponent implements OnInit {
       }
     );
 
+    
+    
     var workoutchart = new CanvasJS.Chart("workout-chart", {
+      
       animationEnabled: true,
       title:{
       },	
       axisY: {
         title: "Workout in minutes",
-        titleFontColor: "#4F81BC",
-        lineColor: "#4F81BC",
-        labelFontColor: "#4F81BC",
-        tickColor: "#4F81BC"
+        titleFontColor: "#17a2b8",
+        lineColor: "#17a2b8",
+        labelFontColor: "#17a2b8",
+        tickColor: "#17a2b8"
       },
       toolTip: {
         shared: true
@@ -179,10 +183,10 @@ export class StatComponent implements OnInit {
       },	
       axisY: {
         title: "Time in nature in minutes",
-        titleFontColor: "#4F81BC",
-        lineColor: "#4F81BC",
-        labelFontColor: "#4F81BC",
-        tickColor: "#4F81BC"
+        titleFontColor: "#17a2b8",
+        lineColor: "#17a2b8",
+        labelFontColor: "#17a2b8",
+        tickColor: "#17a2b8"
       },
       toolTip: {
         shared: true
@@ -213,10 +217,10 @@ export class StatComponent implements OnInit {
       },	
       axisY: {
         title: "Meditation in minutes",
-        titleFontColor: "#4F81BC",
-        lineColor: "#4F81BC",
-        labelFontColor: "#4F81BC",
-        tickColor: "#4F81BC"
+        titleFontColor: "#17a2b8",
+        lineColor: "#17a2b8",
+        labelFontColor: "#17a2b8",
+        tickColor: "#17a2b8"
       },
       toolTip: {
         shared: true
@@ -247,10 +251,10 @@ export class StatComponent implements OnInit {
       },	
       axisY: {
         title: "Daily sleep goal in hours",
-        titleFontColor: "#4F81BC",
-        lineColor: "#4F81BC",
-        labelFontColor: "#4F81BC",
-        tickColor: "#4F81BC"
+        titleFontColor: "#17a2b8",
+        lineColor: "#17a2b8",
+        labelFontColor: "#17a2b8",
+        tickColor: "#17a2b8"
       },
       toolTip: {
         shared: true
@@ -281,10 +285,10 @@ export class StatComponent implements OnInit {
       },	
       axisY: {
         title: "Daily fruit goal in portions",
-        titleFontColor: "#4F81BC",
-        lineColor: "#4F81BC",
-        labelFontColor: "#4F81BC",
-        tickColor: "#4F81BC"
+        titleFontColor: "#17a2b8",
+        lineColor: "#17a2b8",
+        labelFontColor: "#17a2b8",
+        tickColor: "#17a2b8"
       },
       toolTip: {
         shared: true
@@ -315,10 +319,10 @@ export class StatComponent implements OnInit {
       },	
       axisY: {
         title: "Daily vegetable goal in portions",
-        titleFontColor: "#4F81BC",
-        lineColor: "#4F81BC",
-        labelFontColor: "#4F81BC",
-        tickColor: "#4F81BC"
+        titleFontColor: "#17a2b8",
+        lineColor: "#17a2b8",
+        labelFontColor: "#17a2b8",
+        tickColor: "#17a2b8"
       },
       toolTip: {
         shared: true

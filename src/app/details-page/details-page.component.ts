@@ -99,8 +99,6 @@ export class DetailsPageComponent implements OnInit {
     this.httpClientService.getActivities('Nature').subscribe(
       result => this.natureActivities =result.slice()
     );
-
-    console.log(this.medals);
   }
 
   public get workoutActivites(): Activity[]
@@ -128,38 +126,63 @@ export class DetailsPageComponent implements OnInit {
 
   public deleteActivity(id: number): void
   {
-    this.httpClientService.deleteActivity(id).subscribe();
+    this.httpClientService.deleteActivity(id).subscribe( data => {
+      this.zone.runOutsideAngular(() => {
+        window.location.href = 'user';
+      });
+    });;
   }
 
   public deleteGoal(goaltype: string, goal: any): void
   {
     switch (goaltype) { 
       case 'workoutGoal': { 
-        this.httpClientService.deleteWorkoutgoal(goal).subscribe();
-        window.location.reload;
+        this.httpClientService.deleteWorkoutgoal(goal).subscribe( data => {
+          this.zone.runOutsideAngular(() => {
+            window.location.href = 'user';
+          });
+        });
          break; 
       } 
       case 'sleepGoal': { 
-        this.httpClientService.deleteSleepGoal(goal).subscribe(() => {
-          window.location.reload
+        this.httpClientService.deleteSleepGoal(goal).subscribe( data => {
+          this.zone.runOutsideAngular(() => {
+            window.location.href = 'user';
+          });
         });
          break; 
       } 
       case 'fruitGoal': { 
-        this.httpClientService.deleteFruitGoal(goal).subscribe();
+        this.httpClientService.deleteFruitGoal(goal).subscribe( data => {
+          this.zone.runOutsideAngular(() => {
+            window.location.href = 'user';
+          });
+        });
          break; 
       } 
       case 'vegGoal': { 
-        this.httpClientService.deleteVegGoal(goal).subscribe();
+        this.httpClientService.deleteVegGoal(goal).subscribe( data => {
+          this.zone.runOutsideAngular(() => {
+            window.location.href = 'user';
+          });
+        });
          break; 
       } 
       case 'natureGoal': { 
-        this.httpClientService.deleteNatureGoal(goal).subscribe();
+        this.httpClientService.deleteNatureGoal(goal).subscribe( data => {
+          this.zone.runOutsideAngular(() => {
+            window.location.href = 'user';
+          });
+        });
         window.location.reload;
          break; 
       } 
       case 'meditationGoal': { 
-        this.httpClientService.deleteMeditationGoal(goal).subscribe();
+        this.httpClientService.deleteMeditationGoal(goal).subscribe( data => {
+          this.zone.runOutsideAngular(() => {
+            window.location.href = 'user';
+          });
+        });
          break; 
       } 
 
